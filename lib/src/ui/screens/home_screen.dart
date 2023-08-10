@@ -1,3 +1,4 @@
+import 'package:ar_app/src/ui/screens/item_upload_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,8 +15,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return  Scaffold(
       appBar: AppBar(
         title:const Text('AR App'),
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemUploadScreen()));
+
+          }, icon:const Icon(Icons.add,color: Colors.black,)),
+        ],
       ),
-      body: Placeholder(),
+      body:const Placeholder(),
     );
   }
 }

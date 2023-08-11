@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ItemUploadScreen extends StatefulWidget {
   const ItemUploadScreen({super.key});
@@ -182,14 +183,14 @@ class _ItemUploadScreenState extends State<ItemUploadScreen> {
         children: [
           SimpleDialogOption(
             onPressed: (){
-
+              captureImageWithCamera();
             },
             child:const Text("capture image with camera",style: TextStyle(color: Colors.grey),),
           ),
 
           SimpleDialogOption(
             onPressed: (){
-
+              chossImageFromGallery();
             },
             child:const Text("select image from gallery",style: TextStyle(color: Colors.grey),),
           ),
@@ -206,10 +207,49 @@ class _ItemUploadScreenState extends State<ItemUploadScreen> {
      );
  }
  
- 
+ captureImageWithCamera() async{
+  try{
+    final pickedImage =await ImagePicker().pickImage(source: ImageSource.camera);
+    if(pickedImage !=null){
+      String imagePath = pickedImage.path;
+      imageFileUnit8List =await pickedImage.readAsBytes();
+      setState(() {
+        imageFileUnit8List;
+      });
+    }
+
+  }catch(errorMsg){
+    print(errorMsg.toString());
+
+    setState(() {
+      imageFileUnit8List=null;
+    });
+  }
+ }
+
+ chossImageFromGallery()async{
+  try{
+    final pickedImage =await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(pickedImage !=null){
+      String imagePath = pickedImage.path;
+      imageFileUnit8List =await pickedImage.readAsBytes();
+      setState(() {
+        imageFileUnit8List;
+      });
+    }
+
+  }catch(errorMsg){
+    print(errorMsg.toString());
+
+    setState(() {
+      imageFileUnit8List=null;
+    });
+  }
+
+ }
   @override
   Widget build(BuildContext context) {
    
-    return  defaultScreen();
+    return imageFileUnit8List != null?  defaultScreen(): uploadItemScreen();
   }
 }

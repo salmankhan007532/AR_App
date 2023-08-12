@@ -208,6 +208,7 @@ class _ItemUploadScreenState extends State<ItemUploadScreen> {
  }
  
  captureImageWithCamera() async{
+ Navigator.pop(context);
   try{
     final pickedImage =await ImagePicker().pickImage(source: ImageSource.camera);
     if(pickedImage !=null){
@@ -228,6 +229,7 @@ class _ItemUploadScreenState extends State<ItemUploadScreen> {
  }
 
  chossImageFromGallery()async{
+  Navigator.pop(context);
   try{
     final pickedImage =await ImagePicker().pickImage(source: ImageSource.gallery);
     if(pickedImage !=null){
@@ -250,6 +252,6 @@ class _ItemUploadScreenState extends State<ItemUploadScreen> {
   @override
   Widget build(BuildContext context) {
    
-    return imageFileUnit8List != null?  defaultScreen(): uploadItemScreen();
+    return imageFileUnit8List == null ?  defaultScreen(): uploadItemScreen();
   }
 }

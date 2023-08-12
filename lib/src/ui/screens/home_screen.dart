@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title:const Text('AR App'),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ItemUploadScreen()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const ItemUploadScreen()));
 
           }, icon:const Icon(Icons.add,color: Colors.black,)),
         ],
